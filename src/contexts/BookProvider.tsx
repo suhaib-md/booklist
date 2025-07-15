@@ -26,7 +26,7 @@ export const BookProvider = ({ children }: { children: ReactNode }) => {
       status: "To Read",
       finishedDate: null,
     };
-    setBooks((prevBooks) => [...prevBooks, newBook]);
+    setBooks((prevBooks) => [newBook, ...prevBooks]);
     toast({
       title: "Book added!",
       description: `"${book.title}" has been added to your 'To Read' list.`,

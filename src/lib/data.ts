@@ -8,6 +8,8 @@ export const initialBooks: Book[] = [
     synopsis: "A shocking psychological thriller of a woman’s act of violence against her husband—and of the therapist obsessed with uncovering her motive.",
     status: "Read",
     finishedDate: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+    coverImage: "https://placehold.co/400x600.png?text=The+Silent+Patient",
+    genre: "Thriller"
   },
   {
     id: "2",
@@ -16,6 +18,8 @@ export const initialBooks: Book[] = [
     synopsis: "Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides, heir to a noble family tasked with ruling an inhospitable world where the only thing of value is the “spice” melange, a drug capable of extending life and enhancing consciousness.",
     status: "Read",
     finishedDate: new Date(),
+    coverImage: "https://placehold.co/400x600.png?text=Dune",
+    genre: "Sci-Fi"
   },
   {
     id: "3",
@@ -23,6 +27,8 @@ export const initialBooks: Book[] = [
     author: "Andy Weir",
     synopsis: "Ryland Grace is the sole survivor on a desperate, last-chance mission—and if he fails, humanity and the earth itself will perish. Except that right now, he doesn’t know that. He can’t even remember his own name, let alone the nature of his assignment or how to complete it.",
     status: "Currently Reading",
+    coverImage: "https://placehold.co/400x600.png?text=Project+Hail+Mary",
+    genre: "Sci-Fi"
   },
   {
     id: "4",
@@ -30,6 +36,8 @@ export const initialBooks: Book[] = [
     author: "Kristin Hannah",
     synopsis: "An epic novel of love and heroism and hope, set against the backdrop of one of America’s most defining eras—the Great Depression.",
     status: "To Read",
+    coverImage: "https://placehold.co/400x600.png?text=The+Four+Winds",
+    genre: "Historical Fiction"
   },
   {
     id: "5",
@@ -37,5 +45,7 @@ export const initialBooks: Book[] = [
     author: "Kazuo Ishiguro",
     synopsis: "Here is the story of Klara, an Artificial Friend with outstanding observational qualities, who, from her place in the store, keenly observes the behavior of those who come in to browse, and of those who pass on the street outside.",
     status: "To Read",
+    coverImage: "https://placehold.co/400x600.png?text=Klara+and+the+Sun",
+    genre: "Sci-Fi"
   },
 ];

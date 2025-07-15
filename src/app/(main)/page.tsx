@@ -29,16 +29,16 @@ export default function MyBooksPage() {
             Currently Reading
           </h2>
           {currentlyReading.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <AnimatePresence>
-                {currentlyReading.map((book) => (
+                {currentlyReading.map((book, index) => (
                   <motion.div
                     key={book.id}
                     layout
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
                     <BookCard book={book} />
                   </motion.div>
@@ -56,16 +56,16 @@ export default function MyBooksPage() {
             To Read
           </h2>
           {toRead.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <AnimatePresence>
-                {toRead.map((book) => (
+                {toRead.map((book, index) => (
                   <motion.div
                     key={book.id}
                     layout
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
                     <BookCard book={book} />
                   </motion.div>
@@ -83,16 +83,16 @@ export default function MyBooksPage() {
             Read
           </h2>
           {read.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <AnimatePresence>
-                {read.map((book) => (
+                {read.map((book, index) => (
                   <motion.div
                     key={book.id}
                     layout
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
                     <BookCard book={book} />
                   </motion.div>

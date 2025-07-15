@@ -6,5 +6,7 @@ export interface Book {
   author: string;
   synopsis: string;
   status: BookStatus;
+  coverImage?: string;
+  genre?: string;
   finishedDate?: Date | null;
 }

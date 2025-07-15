@@ -26,6 +26,8 @@ const formSchema = z.object({
   synopsis: z.string().min(10, {
     message: "Synopsis must be at least 10 characters.",
   }),
+  coverImage: z.string().url({ message: "Please enter a valid URL." }).optional().or(z.literal('')),
+  genre: z.string().optional(),
 });
 
 type BookFormProps = {
@@ -41,6 +43,8 @@ export function BookForm({ onSubmit, defaultValues, onClose }: BookFormProps) {
       title: defaultValues?.title ?? "",
       author: defaultValues?.author ?? "",
       synopsis: defaultValues?.synopsis ?? "",
+      coverImage: defaultValues?.coverImage ?? "",
+      genre: defaultValues?.genre ?? "",
     },
   });
 
@@ -51,7 +55,7 @@ export function BookForm({ onSubmit, defaultValues, onClose }: BookFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="title"
@@ -80,6 +84,19 @@ export function BookForm({ onSubmit, defaultValues, onClose }: BookFormProps) {
         />
         <FormField
           control={form.control}
+          name="genre"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Genre</FormLabel>
+              <FormControl>
+                <Input placeholder="Sci-Fi" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="synopsis"
           render={({ field }) => (
             <FormItem>
@@ -95,7 +112,20 @@ export function BookForm({ onSubmit, defaultValues, onClose }: BookFormProps) {
             </FormItem>
           )}
         />
-        <div className="flex justify-end gap-2">
+        <FormField
+          control={form.control}
+          name="coverImage"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Cover Image URL</FormLabel>
+              <FormControl>
+                <Input placeholder="https://example.com/cover.jpg" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex justify-end gap-2 pt-4">
             <Button type="button" variant="ghost" onClick={onClose}>Cancel</Button>
             <Button type="submit" variant="default">Save Book</Button>
         </div>

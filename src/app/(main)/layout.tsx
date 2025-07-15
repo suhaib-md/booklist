@@ -78,12 +78,12 @@ export default function MainLayout({
         </SidebarContent>
         <SidebarFooter>
             {isAuthenticated ? (
-                <Button variant="ghost" className="justify-start" onClick={logout}>
+                <Button variant="ghost" className="justify-start w-full" onClick={logout}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout
                 </Button>
             ) : (
-                <Button variant="ghost" className="justify-start" onClick={() => router.push('/login')}>
+                <Button variant="ghost" className="justify-start w-full" onClick={() => router.push('/login')}>
                 <LogIn className="mr-2 h-4 w-4" />
                 Admin Login
                 </Button>
