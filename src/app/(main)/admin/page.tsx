@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import * as z from "zod";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthProvider";
 import { useBooks } from "@/contexts/BookProvider";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -35,12 +36,21 @@ import { BookForm } from "@/components/BookForm";
 import { Badge } from "@/components/ui/badge";
 import { PlusCircle, Edit, Trash2 } from "lucide-react";
 import { Book } from "@/lib/types";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AdminPage() {
   const { books, addBook, updateBook, deleteBook } = useBooks();
   const [isAddDialogOpen, setAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setEditDialogOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
 
   const handleAddBook = (values: { title: string; author: string; synopsis: string; }) => {
     addBook(values);
@@ -59,6 +69,26 @@ export default function AdminPage() {
     setSelectedBook(book);
     setEditDialogOpen(true);
   };
+
+  if (isAuthenticated === null || isAuthenticated === false) {
+    return (
+      <div className="container mx-auto">
+        <PageHeader
+          title="Admin Panel"
+          description="Manage your book collection."
+        />
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-10 w-48" />
+            <Skeleton className="h-10 w-36" />
+          </div>
+          <div className="border rounded-lg">
+            <Skeleton className="h-80 w-full" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto">

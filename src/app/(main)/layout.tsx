@@ -3,7 +3,14 @@
 import * as React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { BookCopy, BarChart3, Wrench, Sparkles, Leaf } from "lucide-react";
+import {
+  BookCopy,
+  BarChart3,
+  Wrench,
+  Sparkles,
+  Leaf,
+  LogOut,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   SidebarProvider,
@@ -15,14 +22,18 @@ import {
   SidebarMenuButton,
   SidebarInset,
   SidebarTrigger,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/contexts/AuthProvider";
+import { Button } from "@/components/ui/button";
 
 const navItems = [
   { href: "/", label: "My Books", icon: BookCopy },
   { href: "/stats", label: "Statistics", icon: BarChart3 },
   { href: "/suggestions", label: "Suggestions", icon: Sparkles },
-  { href: "/admin", label: "Admin Panel", icon: Wrench },
 ];
+
+const adminNavItem = { href: "/admin", label: "Admin Panel", icon: Wrench };
 
 export default function MainLayout({
   children,
@@ -30,6 +41,8 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const { isAuthenticated, logout } = useAuth();
+  const allNavItems = isAuthenticated ? [...navItems, adminNavItem] : navItems;
 
   return (
     <SidebarProvider>
@@ -45,7 +58,7 @@ export default function MainLayout({
             </Link>
           </SidebarHeader>
           <SidebarMenu>
-            {navItems.map((item) => (
+            {allNavItems.map((item) => (
               <SidebarMenuItem key={item.href}>
                 <SidebarMenuButton
                   asChild
@@ -61,6 +74,14 @@ export default function MainLayout({
             ))}
           </SidebarMenu>
         </SidebarContent>
+        {isAuthenticated && (
+          <SidebarFooter>
+            <Button variant="ghost" className="justify-start" onClick={logout}>
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+          </SidebarFooter>
+        )}
       </Sidebar>
       <SidebarInset className="flex flex-col">
         <header className="sticky top-0 z-10 flex items-center h-14 px-4 border-b bg-background/80 backdrop-blur-sm md:hidden">
