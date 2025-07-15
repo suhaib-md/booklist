@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   BookCopy,
@@ -10,6 +10,7 @@ import {
   Sparkles,
   Leaf,
   LogOut,
+  LogIn,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -41,6 +42,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { isAuthenticated, logout } = useAuth();
   const allNavItems = isAuthenticated ? [...navItems, adminNavItem] : navItems;
 
@@ -74,14 +76,19 @@ export default function MainLayout({
             ))}
           </SidebarMenu>
         </SidebarContent>
-        {isAuthenticated && (
-          <SidebarFooter>
-            <Button variant="ghost" className="justify-start" onClick={logout}>
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </Button>
-          </SidebarFooter>
-        )}
+        <SidebarFooter>
+            {isAuthenticated ? (
+                <Button variant="ghost" className="justify-start" onClick={logout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+                </Button>
+            ) : (
+                <Button variant="ghost" className="justify-start" onClick={() => router.push('/login')}>
+                <LogIn className="mr-2 h-4 w-4" />
+                Admin Login
+                </Button>
+            )}
+        </SidebarFooter>
       </Sidebar>
       <SidebarInset className="flex flex-col">
         <header className="sticky top-0 z-10 flex items-center h-14 px-4 border-b bg-background/80 backdrop-blur-sm md:hidden">
