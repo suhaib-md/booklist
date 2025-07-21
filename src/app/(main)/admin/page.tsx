@@ -34,12 +34,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { BookForm } from "@/components/BookForm";
+import { BookSearch } from "@/components/BookSearch";
 import { Badge } from "@/components/ui/badge";
 import { PlusCircle, Edit, Trash2, Wand2, Loader2 } from "lucide-react";
 import { Book } from "@/lib/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from 'next/image';
 import { useToast } from "@/hooks/use-toast";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
 export default function AdminPage() {
@@ -138,11 +140,25 @@ export default function AdminPage() {
               Add New Book
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>Add a New Book</DialogTitle>
             </DialogHeader>
-            <BookForm onSubmit={handleAddBook} onClose={() => setAddDialogOpen(false)} />
+            <Tabs defaultValue="search" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="search">Search</TabsTrigger>
+                <TabsTrigger value="manual">Manual</TabsTrigger>
+              </TabsList>
+              <TabsContent value="search">
+                <BookSearch onBookSelect={(book) => {
+                  addBook(book);
+                  setAddDialogOpen(false);
+                }} />
+              </TabsContent>
+              <TabsContent value="manual">
+                <BookForm onSubmit={handleAddBook} onClose={() => setAddDialogOpen(false)} />
+              </TabsContent>
+            </Tabs>
           </DialogContent>
         </Dialog>
       </div>
@@ -213,7 +229,7 @@ export default function AdminPage() {
                           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                           <AlertDialogDescription>
                             This action cannot be undone. This will permanently delete the book "{book.title}".
-                          </AlertDialogDescription>
+                          </Description>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancel</AlertDialogCancel>

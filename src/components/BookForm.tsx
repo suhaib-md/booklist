@@ -55,7 +55,7 @@ export function BookForm({ onSubmit, defaultValues, onClose }: BookFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-4 pt-4">
         <FormField
           control={form.control}
           name="title"
