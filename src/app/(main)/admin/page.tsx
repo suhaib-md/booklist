@@ -108,7 +108,7 @@ export default function AdminPage() {
 
   if (isAuthenticated === null || isAuthenticated === false) {
     return (
-      <div className="container mx-auto">
+      <div className="container mx-auto p-4 sm:p-6 lg:p-8">
         <PageHeader
           title="Admin Panel"
           description="Manage your book collection."
