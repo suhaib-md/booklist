@@ -1,14 +1,11 @@
 import { NextResponse } from 'next/server';
-import { config } from 'dotenv';
-
-config(); // Load environment variables
-
-const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 
 export async function GET(request: Request) {
+  const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+  
   if (!API_KEY) {
     console.error('Google Books API key is missing');
-    return NextResponse.json({ error: 'API key is missing' }, { status: 500 });
+    return NextResponse.json({ error: 'Server configuration error: API key is missing' }, { status: 500 });
   }
 
   const { searchParams } = new URL(request.url);
