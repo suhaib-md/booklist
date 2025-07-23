@@ -1,3 +1,4 @@
+require('dotenv').config();
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -30,6 +31,4 @@ export async function GET(request: Request) {
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error fetching from Google Books API:', error);
-    return NextResponse.json({ error: 'Failed to fetch from Google Books API' }, { status: 500 });
-  }
-}
+    return NextResponse.json({ error: 'Failed to fetch from Google Books API
