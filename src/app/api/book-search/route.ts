@@ -3,10 +3,13 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
-  
+
   if (!API_KEY) {
     console.error('Google Books API key is missing');
-    return NextResponse.json({ error: 'Server configuration error: API key is missing' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Server configuration error: API key is missing' },
+      { status: 500 }
+    );
   }
 
   const { searchParams } = new URL(request.url);
@@ -31,6 +34,9 @@ export async function GET(request: Request) {
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error fetching from Google Books API:', error);
-    return NextResponse.json({ error: 'Failed to fetch from Google Books API' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to fetch from Google Books API' },
+      { status: 500 }
+    );
   }
 }
