@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
-  const API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+  const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
   
   if (!API_KEY) {
     console.error('Google Books API key is missing');
